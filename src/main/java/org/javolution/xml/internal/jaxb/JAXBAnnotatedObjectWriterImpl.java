@@ -325,8 +325,7 @@ public class JAXBAnnotatedObjectWriterImpl extends AbstractJAXBAnnotatedObjectPa
 
 		while(propOrder.hasNext()){
 			final CharArray prop = propOrder.next();
-
-			final Method method = propOrderMethodCache.get(prop);
+			final Method method = Caches.workaroundGet(propOrderMethodCache, prop);
 			final Object value = method.invoke(element, (Object[]) null);
 
 			if(value == null) {

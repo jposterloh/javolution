@@ -45,6 +45,8 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import static org.javolution.xml.internal.jaxb.Caches.CacheMode.READER;
 
@@ -129,6 +131,20 @@ public class Caches {
 
 		_registeredClassesCache.add(inputClass);
 		_elementClassCache.put(rootElementName, inputClass);
+	}
+
+	static <T> T workaroundGet(AbstractMap<CharArray, T> map, CharArray key) {
+		T result = map.get(key); // regular call
+		if (result == null) {
+			// regular call didn't work => try a workaround
+			for (Entry<CharArray, T> entry : map.entrySet()) {
+				if (entry.getKey().equals(key)) {
+					result = entry.getValue();
+					break;
+				}
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -299,7 +315,7 @@ public class Caches {
 						cacheData._mappedElementsCache, cacheData._elementFieldCache,
 						cacheData._elementMethodCache, field);
 				cacheData._elementFieldCache.put(xmlName, field);
-				method = cacheData._elementMethodCache.get(xmlName);
+				method = Caches.workaroundGet(cacheData._elementMethodCache, xmlName);
 			}
 
 			// Check Type Adapter
