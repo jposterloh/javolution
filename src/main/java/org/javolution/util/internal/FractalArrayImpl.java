@@ -260,6 +260,8 @@ public abstract class FractalArrayImpl<E> extends FractalArray<E> {
 				i = -i - 1; // The "should be" position.
 				System.arraycopy(indices, i, indices, i+1, length - i);
 				System.arraycopy(elements, i, elements, i+1, length - i);
+				indices[i] = index;
+	            elements[i] = element; 
 				length++;
 			}
 			return this;
@@ -275,6 +277,7 @@ public abstract class FractalArrayImpl<E> extends FractalArray<E> {
 			System.arraycopy(elements, i, elements, i+1, length - i);
 			indices[i] = index;
 			elements[i] = inserted;	
+			length++;
 			return this;
 		}
 
