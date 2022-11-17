@@ -324,6 +324,7 @@ public abstract class FractalArrayImpl<E> extends FractalArray<E> {
 			}
 			return 0;
 		}
+		
 		@Override
 		public long previous(long before, Predicate<? super E> matching) {
 			int i = positionOf(before, 0, length);
@@ -735,7 +736,7 @@ public abstract class FractalArrayImpl<E> extends FractalArray<E> {
 //				FractalArrayImpl<E> inner = inners[i];
 //				if (inner == null)
 //					continue;
-//				inner.prefix = indexFor(i, 0L); // Full prefix is the index of the first fractal element.
+//				inner.prefix = indexFor(i, inner.prefix); // Full prefix is the index of the first fractal element.
 //				return inner;
 //			}
 //		}
