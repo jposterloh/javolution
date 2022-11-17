@@ -19,6 +19,7 @@ import org.javolution.context.LocalContext;
 import org.javolution.lang.MathLib;
 import org.javolution.text.TextBuilder;
 
+
 /**
  * <p> Equivalent to a  <code>C/C++ struct</code>; this class confers
  *     interoperability between Java classes and C/C++ struct.</p>
@@ -667,6 +668,10 @@ public class Struct {
             for (int i = 0; i < arrayMember.length;) {
                 arrayMember[i++] = (M) this.new Unsigned32();
             }
+        } else if (UNSIGNED_64.isInstance(arrayMember)) {
+            for (int i = 0; i < arrayMember.length;) {
+                arrayMember[i++] = (M) this.new Unsigned64();
+            }
         } else if (SIGNED_64.isInstance(arrayMember)) {
             for (int i = 0; i < arrayMember.length;) {
                 arrayMember[i++] = (M) this.new Signed64();
@@ -700,6 +705,8 @@ public class Struct {
     private static final Class<? extends Signed32[]> SIGNED_32 = new Signed32[0]
             .getClass();
     private static final Class<? extends Unsigned32[]> UNSIGNED_32 = new Unsigned32[0]
+            .getClass();
+    private static final Class<? extends Unsigned64[]> UNSIGNED_64 = new Unsigned64[0]
             .getClass();
     private static final Class<? extends Signed64[]> SIGNED_64 = new Signed64[0]
             .getClass();
@@ -1386,7 +1393,7 @@ public class Struct {
             return String.valueOf(this.get());
         }
     }
-
+ 
     /**
      * This class represents a 64 bits signed integer.
      */
@@ -1413,6 +1420,39 @@ public class Struct {
             } else {
                 getByteBuffer().putLong(index,
                         set(value, 8, getByteBuffer().getLong(index)));
+            }
+        }
+
+        public String toString() {
+            return String.valueOf(this.get());
+        }
+    }
+
+    /**
+     * This class represents a 64 bits unsigned integer.
+     */
+    public class Unsigned64 extends Member {
+        public Unsigned64() {
+            super(64, 8);
+        }
+
+        public Unsigned64(int nbrOfBits) {
+            super(nbrOfBits, 8);
+        }
+
+        public long get() {
+            final int index = getByteBufferPosition() + offset();
+            long word = getByteBuffer().getLong(index);
+            return 0xFFFFFFFFL & ((bitLength() == 64) ? word : get(8, word));
+        }
+
+        public void set(long value) {
+            final int index = getByteBufferPosition() + offset();
+            if (bitLength() == 64) {
+                getByteBuffer().putLong(index, (int) value);
+            } else {
+                getByteBuffer().putLong(index,
+                        set((int) value, 8, getByteBuffer().getLong(index)));
             }
         }
 

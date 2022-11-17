@@ -24,7 +24,7 @@
 
 	<groupId>org.javolution</groupId>
 	<artifactId>javolution</artifactId>
-	<version>7.0.0-SNAPSHOT</version>
+	<version>7.0.1-SNAPSHOT</version>
 
 	<packaging>bundle</packaging>
 	<name>Javolution</name>
@@ -70,13 +70,19 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.25</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -96,7 +102,17 @@
 				    <target>1.8</target>
 				</configuration>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M7</version>
+				<configuration>
+					<excludes>
+						<exclude>${exclude.tests}</exclude>
+					</excludes>
+				</configuration>
+			</plugin>	
+					
 			<!-- ============== -->
 			<!-- OSGi Packaging -->
 			<!-- ============== -->
@@ -169,6 +185,16 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<exclude.tests>nothing-to-exclude</exclude.tests>
 	</properties>
+	
+	<profiles>
+		<profile>
+			<id>nojaxb</id>
+			<properties>
+				<exclude.tests>**/jaxb/*.java</exclude.tests>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
