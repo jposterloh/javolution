@@ -11,6 +11,8 @@ package org.javolution.context.internal;
 import org.javolution.context.LogContext;
 import org.javolution.text.TextBuilder;
 
+import static org.javolution.context.LogContext.Level.DEBUG;
+
 /**
  * Default implementation of LogContext.
  */
