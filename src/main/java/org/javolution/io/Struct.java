@@ -1449,10 +1449,10 @@ public class Struct {
         public void set(long value) {
             final int index = getByteBufferPosition() + offset();
             if (bitLength() == 64) {
-                getByteBuffer().putLong(index, (int) value);
+                getByteBuffer().putLong(index, value);
             } else {
                 getByteBuffer().putLong(index,
-                        set((int) value, 8, getByteBuffer().getLong(index)));
+                        set(value, 8, getByteBuffer().getLong(index)));
             }
         }
 

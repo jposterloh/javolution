@@ -217,7 +217,7 @@ public final class TextContextImpl extends TextContext {
         @SuppressWarnings("deprecation")
 		@Override
         public Float parse(CharSequence csq, Cursor cursor) {
-            return new Float(TypeFormat.parseFloat(csq, cursor));
+            return Float.valueOf(TypeFormat.parseFloat(csq, cursor));
         }
 
     };
@@ -230,10 +230,9 @@ public final class TextContextImpl extends TextContext {
             return TypeFormat.format(obj.doubleValue(), dest);
         }
 
-        @SuppressWarnings("deprecation")
-		@Override
+        @Override
         public Double parse(CharSequence csq, Cursor cursor) {
-            return new Double(TypeFormat.parseDouble(csq, cursor));
+            return Double.valueOf(TypeFormat.parseDouble(csq, cursor));
         }
 
     };
