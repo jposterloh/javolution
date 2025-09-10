@@ -43,10 +43,20 @@
 	<!-- ==================== -->
 
 	<dependencies>
-		<dependency>
+		<dependency> <!-- Fixing CVE-2024-25710 -->
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-compress</artifactId>
 			<version>1.28.0</version>
+		</dependency>
+		<dependency> <!-- Fixing CVE-2025-48924 in 2.6-->
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.18.0</version>
+		</dependency>
+		<dependency> <!-- Fixing CVE-2018-1002200-->
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-archiver</artifactId>
+			<version>4.10.1</version>
 		</dependency>
 		<dependency> <!-- To support Javolution C++ build (MSVC2015 environment
 			factory) -->
