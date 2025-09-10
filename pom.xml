@@ -63,6 +63,12 @@
 			<groupId>org.codehaus.mojo</groupId>
 			<artifactId>native-maven-plugin</artifactId>
 			<version>1.0-alpha-9</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-lang</groupId>
+					<artifactId>commons-lang</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency> <!-- OSGI Core Library -->
 			<groupId>org.osgi</groupId>
