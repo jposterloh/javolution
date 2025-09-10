@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -8,9 +9,9 @@
 	<!-- ==================== -->
 
 	<scm>
-		<url>https://github.com/javolution/javolution</url>
-		<connection>scm:git:git://github.com/javolution/javolution</connection>
-		<developerConnection>scm:git:git@github.com:javolution/javolution.git</developerConnection>
+		<url>https://github.com/jposterloh/javolution.git</url>
+		<connection>scm:git:git://github.com/jposterloh/javolution.git</connection>
+		<developerConnection>scm:git:git@github.com:jposterloh/javolution.git</developerConnection>
 	</scm>
 
 	<issueManagement>
@@ -24,7 +25,7 @@
 
 	<groupId>org.javolution</groupId>
 	<artifactId>javolution</artifactId>
-	<version>7.0.1-SNAPSHOT</version>
+	<version>7.0.2-SNAPSHOT</version>
 
 	<packaging>bundle</packaging>
 	<name>Javolution</name>
@@ -42,7 +43,13 @@
 	<!-- ==================== -->
 
 	<dependencies>
-		<dependency> <!-- To support Javolution C++ build (MSVC2015 environment factory) -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.28.0</version>
+		</dependency>
+		<dependency> <!-- To support Javolution C++ build (MSVC2015 environment
+			factory) -->
 			<groupId>org.codehaus.mojo</groupId>
 			<artifactId>native-maven-plugin</artifactId>
 			<version>1.0-alpha-9</version>
@@ -63,10 +70,10 @@
 			<version>1.0.0-RC4</version>
 		</dependency>
 		<dependency> <!-- JAXB API (no more included in Java SE 9+)  -->
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.2.11</version>
-        </dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.2.11</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -83,17 +90,17 @@
 	<build>
 		<plugins>
 
-            <!-- ============================= -->
-            <!-- Java Compiler Required (1.8+) -->
-            <!-- ============================= -->
+			<!-- ============================= -->
+			<!-- Java Compiler Required (1.8+) -->
+			<!-- ============================= -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.6.1</version>
 				<configuration>
-				    <source>1.8</source>
-				    <target>1.8</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -105,8 +112,8 @@
 						<exclude>${exclude.tests}</exclude>
 					</excludes>
 				</configuration>
-			</plugin>	
-					
+			</plugin>
+
 			<!-- ============== -->
 			<!-- OSGi Packaging -->
 			<!-- ============== -->
@@ -118,9 +125,12 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Export-Package>!org.javolution.*.internal.*,org.javolution.*,org.osgi.service.log</Export-Package>
-						<Private-Package>org.javolution.*.internal.*,javax.realtime.*</Private-Package>
-						<Bundle-Activator>org.javolution.osgi.internal.JavolutionActivator</Bundle-Activator>
+						<Export-Package>
+							!org.javolution.*.internal.*,org.javolution.*,org.osgi.service.log</Export-Package>
+						<Private-Package>
+							org.javolution.*.internal.*,javax.realtime.*</Private-Package>
+						<Bundle-Activator>
+							org.javolution.osgi.internal.JavolutionActivator</Bundle-Activator>
 						<Export-Service>org.javolution.xml.stream.XMLInputFactory,
 							org.javolution.xml.stream.XMLOutputFactory</Export-Service>
 					</instructions>
@@ -181,7 +191,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<exclude.tests>nothing-to-exclude</exclude.tests>
 	</properties>
-	
+
 	<profiles>
 		<profile>
 			<id>nojaxb</id>
