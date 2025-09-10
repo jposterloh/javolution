@@ -45,7 +45,7 @@
 		<dependency> <!-- To support Javolution C++ build (MSVC2015 environment factory) -->
 			<groupId>org.codehaus.mojo</groupId>
 			<artifactId>native-maven-plugin</artifactId>
-			<version>1.0-alpha-8</version>
+			<version>1.0-alpha-9</version>
 		</dependency>
 		<dependency> <!-- OSGI Core Library -->
 			<groupId>org.osgi</groupId>
